@@ -48,6 +48,11 @@ class Vue {
           this.data[attrVal] = node.value
         })
       }
+      
+      // apply binding to all tree node
+      if(node.hasChildNodes()) {
+        this.Compile(node);
+      }
     })
   }
 }
