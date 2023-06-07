@@ -34,21 +34,21 @@ class Vue {
   Compile(el) {
     const nodes = el.children
 
-    ;[...nodes].forEach((node, index) => {
-      if (node.hasAttribute('v-text')) {
-        let attrVal = node.getAttribute('v-text')
-        this.dep.addSub(new Watcher(node, this, attrVal, 'innerHTML'))
-      }
+      ;[...nodes].forEach((node, index) => {
+        if (node.hasAttribute('v-text')) {
+          let attrVal = node.getAttribute('v-text')
+          this.dep.addSub(new Watcher(node, this, attrVal, 'innerHTML'))
+        }
 
-      if (node.hasAttribute('v-model')) {
-        let attrVal = node.getAttribute('v-model')
-        this.dep.addSub(new Watcher(node, this, attrVal, 'value'))
+        if (node.hasAttribute('v-model')) {
+          let attrVal = node.getAttribute('v-model')
+          this.dep.addSub(new Watcher(node, this, attrVal, 'value'))
 
-        node.addEventListener('input', () => {
-          this.data[attrVal] = node.value
-        })
-      }
-    })
+          node.addEventListener('input', () => {
+            this.data[attrVal] = node.value
+          })
+        }
+      })
   }
 }
 
@@ -66,7 +66,6 @@ class Watcher {
   update() {
     this.el[this.attr] = this.vm.data[this.exp] // 更新视图
   }
-
 }
 
 // 收集订阅者
